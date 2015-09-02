@@ -1,0 +1,19 @@
+{
+    "name": "simpleid/simpleid-teams",
+    "type": "simpleid-module",
+    "description": "SimpleID module to implement the OpenID teams extension.",
+    "homepage": "https://github.com/simpleid/simpleid-teams",
+    "require": {
+        "simpleid/module-installer": "*"
+    },
+    "license": "GPL-2.0+",
+    "authors": [
+        {
+            "name": "Kelvin Mo",
+            "email": "kmo@users.sourceforge.net"
+        }
+    ],
+    "autoload": {
+        "psr-4": { "SimpleID\\Modules\\Protocols\\OpenID\\Teams": "src/" }
+    }
+}
