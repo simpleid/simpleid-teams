@@ -1,29 +1,35 @@
-SimpleID OpenID Teams Extension
-===============================
+SimpleID OpenID Teams Module
+============================
 
-This SimpleID extension implements the [OpenID Teams](https://dev.launchpad.net/OpenIDTeams)
+This SimpleID module implements the [OpenID Teams](https://dev.launchpad.net/OpenIDTeams)
 extension developed by Launchpad.  It allows you to specify a series of strings (known as teams)
 which SimpleID will return to web sites which request them.
 
 Installing and Uninstalling
 ---------------------------
 
-See the [SimpleID documentation](http://simpleid.koinic.net/documentation/using-simpleid/extensions/installing-and-uninstalling-extensions)
-for instructions
+This module can be installed by running the following [Composer](https://getcomposer.org/)
+command in the SimpleID web directory:
+
+```bash
+composer install simpleid/simpleid-teams
+```
+
+See the [SimpleID documentation](http://simpleid.koinic.net/docs/2/modules/)
+for further instructions.
 
 Configuration
 -------------
 
-The teams you belong to specified in your [identity file](http://simpleid.koinic.net/documentation/getting-started/setting-identity/identity-files).
-Add a section called `teams` in your identity file and specify the teams under the key `teams` within
-that section.  Separate multiple teams with commas (without spaces).
+The teams you belong to are specified in your [user file](http://simpleid.koinic.net/docs/2/users/), under the value `teams.teams`
+as an array.  For example:
 
-An example is given below.
-
-<pre>
-[teams]
-teams="foo,bar"
-</pre>
+```yaml
+teams:
+    teams:
+        - foo
+        - bar
+```
 
 
 Security considerations
@@ -43,8 +49,6 @@ To report bugs, please use the [SimpleID trac](http://simpleid.koinic.net/trac).
 
 Licensing
 ---------
-
-Licensing information for the OpenShift distribution can be found in the file COPYING.txt.
 
 Licensing information for the core SimpleID software can be found in the
 [source distribution](http://simpleid.koinic.net/download).
