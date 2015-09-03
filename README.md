@@ -12,7 +12,7 @@ This module can be installed by running the following [Composer](https://getcomp
 command in the SimpleID web directory:
 
 ```bash
-composer install simpleid/simpleid-teams
+composer require simpleid/simpleid-teams
 ```
 
 See the [SimpleID documentation](http://simpleid.koinic.net/docs/2/modules/)
