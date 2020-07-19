@@ -44,7 +44,7 @@ class TeamsOpenIDExtensionModule extends Module {
      * @return array
      */
     function xrdsTypesHook() {
-        return array(self::OPENID_NS_TEAMS);
+        return [ self::OPENID_NS_TEAMS ];
     }
 
     /**
@@ -66,10 +66,10 @@ class TeamsOpenIDExtensionModule extends Module {
         $alias = $response->getAliasForExtension(self::OPENID_NS_TEAMS, 'teams');
         $response['ns.' . $alias] = self::OPENID_NS_TEAMS;
 
-        $query_membership = (isset($teams_request['query_membership'])) ? explode(',', $teams_request['query_membership']) : array();
-        $is_member = array();
+        $query_membership = (isset($teams_request['query_membership'])) ? explode(',', $teams_request['query_membership']) : [];
+        $is_member = [];
 
-        $user_teams = ($user->pathExists('teams.teams')) ? $user->pathGet('teams.teams') : array();
+        $user_teams = ($user->pathExists('teams.teams')) ? $user->pathGet('teams.teams') : [];
 
         foreach ($query_membership as $team) {
             if (in_array($team, $user_teams)) $is_member[] = $team;
