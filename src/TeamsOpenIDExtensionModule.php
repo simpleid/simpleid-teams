@@ -24,6 +24,8 @@ namespace SimpleID\Modules\Protocols\OpenID\Teams;
 
 use SimpleID\Module;
 use SimpleID\Auth\AuthManager;
+use SimpleID\Protocols\OpenID\OpenIDResponseBuildEvent;
+use SimpleID\Util\Events\BaseDataCollectionEvent;
 
 /**
  * Implements the Launchpad OpenID Teams extension.
@@ -41,20 +43,27 @@ class TeamsOpenIDExtensionModule extends Module {
     /**
      * Returns the support for teams in SimpleID XRDS document
      *
-     * @return array
+     * @param BaseDataCollectionEvent $event
+     * @return void
      */
-    function xrdsTypesHook() {
-        return array(self::OPENID_NS_TEAMS);
+    function onXrdsTypes(BaseDataCollectionEvent $event) {
+        $event->addResult(self::OPENID_NS_TEAMS);
     }
 
     /**
-     * @see hook_response()
+     * @see SimpleID\Protocols\OpenID\OpenIDResponseBuildEvent
+     * @return void
      */
-    public function openIDResponseHook($assertion, $request, $response) {
+    public function onOpenIDResponseBuildEvent(OpenIDResponseBuildEvent $event) {
         // We only deal with positive assertions
-        if (!$assertion) return;
+        if (!$event->isPositiveAssertion()) return;
 
         // We only respond if the extension is requested
+        /** @var \SimpleID\Protocols\OpenID\Request */
+        $request = $event->getRequest();
+        /** @var \SimpleID\Protocols\OpenID\Response */
+        $response = $event->getResponse();
+        
         if (!$request->hasExtension(self::OPENID_NS_TEAMS)) return;
 
         $auth = AuthManager::instance();
